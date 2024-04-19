@@ -1,5 +1,6 @@
 const req1 = document.querySelector('.req1GET')
 const req2 = document.querySelector('.req2POST')
+const req3 = document.querySelector('.req3GET')
 
 
 //! GET
@@ -71,5 +72,14 @@ req2.addEventListener('click', async () => {
 		console.log(user)
 	} catch (err) {
 		console.error('Произошла ошибка при добавлении нового пользователя', err)
+	}
+})
+req3.addEventListener('click', async () => {
+	try {
+		const users = await getData('http://localhost:3000/getUsers')
+
+		console.log(users)
+	} catch (err) {
+		console.error('Произошла ошибка при получении пользователей', err)
 	}
 })
