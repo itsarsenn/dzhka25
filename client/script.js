@@ -13,31 +13,6 @@ const getData = url => {
 			
 	)
 }
-// const responses = document.querySelector('.responses'); 
-
-// async function getUsers() {
-//   try {
-//     const url = 'http://127.0.0.1:5500/client/index.html';
-//     const response = await fetch(url);
-//      const json = await response.json();
-
-//     responses.innerHTML = '';
-    
-//      json.reverse().forEach(user => {
-//       responses.insertAdjacentHTML('beforeend', `
-//         <li>
-//           <p class="name">${user.name}</p> 
-//           <p class="price">${user.price}</p>
-//         </li>
-//       `)
-//     })
-
-//   } catch (err) {
-//     console.error('Произошла ошибка при получении пользователей', err);
-//   }
-// }
-
-// getUsers();
 
 //! POST
 const postData = (url, data) => {
@@ -52,11 +27,17 @@ const postData = (url, data) => {
 			.catch(error => reject(error))
 	)
 }
+
+
+document.addEventListener('DOMContentLoaded', () => {
+
+const resultElement = document.getElementById('responses');
+
 req1.addEventListener('click', async () => {
 	try {
 		const users = await getData('http://localhost:3000/getUsers')
 
-		console.log(users)
+		resultElement.innerHTML = JSON.stringify(users);
 	} catch (err) {
 		console.error('Произошла ошибка при получении пользователей', err)
 	}
@@ -65,11 +46,11 @@ req2.addEventListener('click', async () => {
 	let name = prompt('Введите название')
 	let price = prompt('Введите цену')
 	try {
-		let user = {
+		let users = {
 			name,
 			price
 		}
-		console.log(user)
+		resultElement.innerHTML = JSON.stringify(users);
 	} catch (err) {
 		console.error('Произошла ошибка при добавлении нового пользователя', err)
 	}
@@ -78,8 +59,9 @@ req3.addEventListener('click', async () => {
 	try {
 		const users = await getData('http://localhost:3000/getUsers')
 
-		console.log(users)
+		resultElement.innerHTML = JSON.stringify(users);
 	} catch (err) {
 		console.error('Произошла ошибка при получении пользователей', err)
 	}
 })
+});
